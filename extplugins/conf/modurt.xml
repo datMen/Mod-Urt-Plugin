@@ -1,0 +1,13 @@
+<configuration plugin="modurt">
+   <settings name="commands">
+        <set name="giveweapon-gw">100</set>
+        <set name="giveitem-gi">60</set>
+        <set name="health-heal">80</set>
+        <set name="kill-kl">90</set>
+        <set name="fly">80</set>
+        <set name="god-godmode">100</set>
+        <set name="invisible-inv">100</set>
+        <set name="visible-vis">100</set>
+        <set name="teleport-tp">60</set>
+   </settings>
+</configuration>
