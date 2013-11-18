@@ -241,8 +241,8 @@ class ModurtPlugin(b3.plugin.Plugin):
         input = self._adminPlugin.parseUserCmd(data)
         scname = input[0]
         sclient = self._adminPlugin.findClientPrompt(scname, client)
-        self.console.write('forcecvar %s cg_rgb "1"' % (client.cid))
-        self.console.write('forcecvar %s cg_rgb "0"' % (client.cid))
+        self.console.write('forcecvar %s cg_rgb "1"' % (sclient.cid))
+        self.console.write('forcecvar %s cg_rgb "0"' % (sclient.cid))
         self.console.write('sendclientcommand all print "%s ^7is now ^2Visible"' % (sclient.exactName))
         self.console.write('sendclientcommand %s cp "You are now ^2Visible^7!!"' % (sclient.cid))
             
