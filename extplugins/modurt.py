@@ -1,7 +1,7 @@
-__version__ = '2.0'
+__version__ = '2.1'
 __author__  = 'LouK' # www.sniperjum.com
 
-import b3, re, random
+import b3, random
 import b3.events
 import b3.plugin
     
@@ -39,7 +39,7 @@ class ModurtPlugin(b3.plugin.Plugin):
 
         return None
            
-    def findWeapid(self, weapon):
+    def findWeapid(self, weapon, client):
         if (weapon == "sr8") or (weapon == "SR8"):
             valor = "N"
         elif (weapon == "spas") or (weapon == "SPAS") or (weapon == "FRANCHI") or (weapon == "franchi"):
@@ -73,7 +73,7 @@ class ModurtPlugin(b3.plugin.Plugin):
             return False
         return valor
     
-    def findItemid(self, weapon):
+    def findItemid(self, weapon, client):
         if (weapon == "kevlar") or (weapon == "KEVLAR") or (weapon == "KEV") or (weapon == "kev"):
             valor = "A"
         elif (weapon == "helmet") or (weapon == "HELMET") or (weapon == "HEL") or (weapon == "hel"):
@@ -130,26 +130,26 @@ class ModurtPlugin(b3.plugin.Plugin):
                 return False
             
             if len(input) == 3:
-                self.console.write('gw %s %s %s %s' % (client.cid, self.findWeapid(weapon), amount, shells))
+                self.console.write('gw %s %s %s %s' % (client.cid, self.findWeapid(weapon, client), amount, shells))
                 client.message("You have now a ^2%s^7 with ^5%s^7 bullets and ^5%s^7 shells" % (weapon, amount, shells))
             elif len(input) == 2:
-                self.console.write('gw %s %s %s' % (client.cid, self.findWeapid(weapon), amount))
+                self.console.write('gw %s %s %s' % (client.cid, self.findWeapid(weapon, client), amount))
                 client.message("You have now a ^2%s^7 with ^5%s^7 bullets" % (weapon, amount))
             else:
-                self.console.write('gw %s %s' % (client.cid, self.findWeapid(weapon)))
+                self.console.write('gw %s %s' % (client.cid, self.findWeapid(weapon, client)))
                 client.message("You have now a ^2%s" % weapon)
             return False
         
         if len(input) == 2:
-            self.console.write('gw %s %s' % (sclient.cid, self.findWeapid(weapon)))
+            self.console.write('gw %s %s' % (sclient.cid, self.findWeapid(weapon, client)))
             sclient.message("%s gave you a ^2%s" % (client.exactName, weapon))
             client.message("You gave a ^2%s ^7to %s" % (weapon, sclient.exactName))
         elif len(input) == 3:
-            self.console.write('gw %s %s %s' % (client.cid, self.findWeapid(weapon), amount))
+            self.console.write('gw %s %s %s' % (client.cid, self.findWeapid(weapon, client), amount))
             sclient.message("%s gave you a ^2%s^7 with ^5%s^7 bullets" % (client.exactName, weapon, amount))
             client.message("You gave a ^2%s^7 with ^5%s^7 bullets ^7to %s" % (weapon, amount, sclient.exactName))
         elif len(input) == 4:
-            self.console.write('gw %s %s %s %s' % (client.cid, self.findWeapid(weapon), amount, shells))
+            self.console.write('gw %s %s %s %s' % (client.cid, self.findWeapid(weapon, client), amount, shells))
             sclient.message("%s gave you a ^2%s^7 with ^5%s^7 bullets and ^5%s^7 shells" % (client.exactName, weapon, amount, shells))
             client.message("You gave a ^2%s^7 with ^5%s^7 bullets and ^5%s^7 shells to %s" % (weapon, amount, shells, sclient.exactName))
             
@@ -174,7 +174,7 @@ class ModurtPlugin(b3.plugin.Plugin):
                 client.message('Correct usage is ^2!gi ^4<playername or partialname> <item>')
                 return False
             
-            self.console.write('gi %s %s' % (client.cid, self.findItemid(item)))
+            self.console.write('gi %s %s' % (client.cid, self.findItemid(item, client)))
             client.message("You have now a ^2%s" % item)
             return False
         
@@ -182,7 +182,7 @@ class ModurtPlugin(b3.plugin.Plugin):
             client.message('Correct usage is ^2!gi ^4<playername or partialname> <item>')
             return False
         
-        self.console.write('gi %s %s' % (sclient.cid, self.findItemid(item)))
+        self.console.write('gi %s %s' % (sclient.cid, self.findItemid(item, client)))
         sclient.message("%s gave you a ^2%s" % (client.exactName, item))
         client.message("You gave a ^2%s ^7to %s" % (item, sclient.exactName))
             
